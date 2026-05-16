@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Brazilian\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2026-04-17 08:15+0300\n"
+"POT-Creation-Date: 2026-05-16 11:06+0300\n"
 "PO-Revision-Date: 2025-12-04 09:22-0300\n"
 "Last-Translator: Cristiano Fraga G. Nunes <cfgnunes@gmail.com>\n"
 "Language-Team: Brazilian\n"
@@ -2108,19 +2108,23 @@ msgid "Search"
 msgstr "Procurar"
 
 #: src/util.c:54
+msgid "Send"
+msgstr ""
+
+#: src/util.c:55
 msgid "Settings"
 msgstr "Configurações"
 
-#: src/util.c:55
+#: src/util.c:56
 msgid "Yes"
 msgstr "Sim"
 
-#: src/util.c:657 src/util.c:718
+#: src/util.c:658 src/util.c:719
 #, c-format
 msgid "WARNING: Run command failed: %s\n"
 msgstr "AVISO: Falha ao executar comando: %s\n"
 
-#: src/util.c:887
+#: src/util.c:888
 msgid "Case _sensitive"
 msgstr "Diferenciar _maiúsculas/minúsculas"
 

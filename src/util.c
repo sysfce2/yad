@@ -51,6 +51,7 @@ const YadStock yad_stock_items[] = {
   { "yad-remove",  N_("Remove"), "list-remove" },
   { "yad-save",  N_("Save"), "document-save" },
   { "yad-search", N_("Search"), "system-search" },
+  { "yad-send", N_("Send"), "document-send" },
   { "yad-settings",  N_("Settings"), "gtk-preferences" },
   { "yad-yes",  N_("Yes"), "gtk-yes" }
 };

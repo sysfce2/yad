@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2026-04-17 08:15+0300\n"
+"POT-Creation-Date: 2026-05-16 11:06+0300\n"
 "PO-Revision-Date: 2021-11-28 19:00+0200\n"
 "Last-Translator: Victor Ananjevsky <victor@sanana.kiev.ua>\n"
 "Language-Team: \n"
@@ -2105,19 +2105,23 @@ msgid "Search"
 msgstr "Пошук"
 
 #: src/util.c:54
+msgid "Send"
+msgstr "Відправити"
+
+#: src/util.c:55
 msgid "Settings"
 msgstr "Налаштування"
 
-#: src/util.c:55
+#: src/util.c:56
 msgid "Yes"
 msgstr "Так"
 
-#: src/util.c:657 src/util.c:718
+#: src/util.c:658 src/util.c:719
 #, c-format
 msgid "WARNING: Run command failed: %s\n"
 msgstr "УВАГА: Збій при запуску команди: %s\n"
 
-#: src/util.c:887
+#: src/util.c:888
 msgid "Case _sensitive"
 msgstr "Враховувати _регістр"
 

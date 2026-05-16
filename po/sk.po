@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2026-04-17 08:15+0300\n"
+"POT-Creation-Date: 2026-05-16 11:06+0300\n"
 "PO-Revision-Date: 2013-03-30 08:10+0100\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: slovenčina <debian-l10n-slovak@lists.debian.org>\n"
@@ -2213,19 +2213,23 @@ msgid "Search"
 msgstr ""
 
 #: src/util.c:54
-msgid "Settings"
+msgid "Send"
 msgstr ""
 
 #: src/util.c:55
+msgid "Settings"
+msgstr ""
+
+#: src/util.c:56
 msgid "Yes"
 msgstr ""
 
-#: src/util.c:657 src/util.c:718
+#: src/util.c:658 src/util.c:719
 #, c-format
 msgid "WARNING: Run command failed: %s\n"
 msgstr ""
 
-#: src/util.c:887
+#: src/util.c:888
 msgid "Case _sensitive"
 msgstr ""
 
