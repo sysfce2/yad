@@ -308,6 +308,8 @@ static GOptionEntry calendar_options[] = {
     N_("Set the filename with dates details"), N_("FILENAME") },
   { "show-weeks", 0, 0, G_OPTION_ARG_NONE, &options.calendar_data.weeks,
     N_("Show week numbers at the left side of calendar"), NULL },
+  { "select-action", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_STRING, &options.action_data.select,
+    N_("Set select action"), N_("CMD") },
   { NULL }
 };
 
@@ -444,7 +446,7 @@ static GOptionEntry icons_options[] = {
     N_("Use GenericName field instead of Name for icon label"), NULL },
   { "item-width", 0, 0, G_OPTION_ARG_INT, &options.icons_data.width,
     N_("Set the width of dialog items"), NULL },
-  { "icon-size", 0,  G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
+  { "icon-size", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
     N_("Force using specified icon size"), N_("SIZE") },
   { "term", 0, 0, G_OPTION_ARG_STRING, &options.icons_data.term,
     /* xgettext: no-c-format */

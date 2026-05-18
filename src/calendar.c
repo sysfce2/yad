@@ -87,6 +87,21 @@ double_click_cb (GtkWidget * w, gpointer data)
     yad_exit (options.data.def_resp);
 }
 
+static void
+day_selected_cb (GtkWidget * w, gpointer data)
+{
+  static gchar *cmd = NULL;
+  guint y, m, d;
+
+  gtk_calendar_get_date (GTK_CALENDAR (w), &y, &m, &d);
+
+  g_free (cmd);
+  cmd = g_strdup_printf ("%s %u %u %u", options.action_data.select, y, m, d);
+
+  if (cmd)
+    run_command_async (cmd);
+}
+
 GtkWidget *
 calendar_create_widget (GtkWidget * dlg)
 {
@@ -113,6 +128,9 @@ calendar_create_widget (GtkWidget * dlg)
   gtk_calendar_set_display_options (GTK_CALENDAR (w), cal_opts);
 
   g_signal_connect (w, "day-selected-double-click", G_CALLBACK (double_click_cb), dlg);
+
+  if (options.action_data.select)
+    g_signal_connect (w, "day-selected", G_CALLBACK (day_selected_cb), dlg);
 
   return w;
 }
