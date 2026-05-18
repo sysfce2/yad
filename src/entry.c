@@ -51,10 +51,10 @@ icon_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * event, gpo
       switch (pos)
         {
         case GTK_ENTRY_ICON_PRIMARY:
-          cmd = options.entry_data.licon_action;
+          cmd = options.action_data.licon;
           break;
         case GTK_ENTRY_ICON_SECONDARY:
-          cmd = options.entry_data.ricon_action;
+          cmd = options.action_data.ricon;
           break;
         }
 

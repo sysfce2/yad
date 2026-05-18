@@ -80,9 +80,9 @@ keys_cb (GtkWidget *w, GdkEventKey *ev, gpointer d)
   switch (ev->keyval)
     {
     case GDK_KEY_F1:
-      if (options.data.f1_action)
+      if (options.action_data.f1)
         {
-          run_command_async (options.data.f1_action);
+          run_command_async (options.action_data.f1);
           return TRUE;
         }
       break;

@@ -260,7 +260,6 @@ typedef struct {
   gboolean use_interp;
   gchar *interp;
   gchar *uri_handler;
-  gchar *f1_action;
   gchar *workdir;
   /* window settings */
   gboolean sticky;
@@ -328,9 +327,7 @@ typedef struct {
   gboolean completion;
   gboolean numeric;
   gchar *licon;
-  gchar *licon_action;
   gchar *ricon;
-  gchar *ricon_action;
 } YadEntryData;
 
 typedef struct {
@@ -355,7 +352,6 @@ typedef struct {
   guint focus_field;
   gboolean cycle_read;
   gboolean align_buttons;
-  gchar *changed_action;
   gboolean homogeneous;
 } YadFormData;
 
@@ -404,9 +400,6 @@ typedef struct {
   gchar *wrap_cols;
   PangoEllipsizeMode ellipsize;
   gchar *ellipsize_cols;
-  gchar *dclick_action;
-  gchar *select_action;
-  gchar *row_action;
   gboolean tree_expanded;
   gboolean regex_search;
   gboolean clickable;
@@ -443,7 +436,6 @@ typedef struct {
 
 typedef struct {
   YadPictureType size;
-  gchar *change_cmd;
   gint inc;
 } YadPictureData;
 
@@ -564,6 +556,16 @@ typedef struct {
 #endif
 } YadCommonData;
 
+typedef struct {
+  gchar *f1;
+  gchar *licon;
+  gchar *ricon;
+  gchar *changed;
+  gchar *dclick;
+  gchar *select;
+  gchar *row;
+} YadActionData;
+
 #ifdef HAVE_SOURCEVIEW
 typedef struct {
   gchar *theme;                         /* Default color theme name */
@@ -608,6 +610,7 @@ typedef struct {
 
   YadData data;
   YadCommonData common_data;
+  YadActionData action_data;
 
   YadAboutData about_data;
   YadAppData app_data;

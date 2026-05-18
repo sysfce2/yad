@@ -67,7 +67,7 @@ list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
   if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter)
     {
-      if (options.list_data.dclick_action)
+      if (options.action_data.dclick)
         {
           /* FIXME: check this under gtk-3.0 */
           if (event->state & GDK_CONTROL_MASK)
@@ -775,7 +775,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
 
   model = gtk_tree_view_get_model (view);
 
-  if (options.list_data.dclick_action)
+  if (options.action_data.dclick)
     {
       gchar *cmd, *args = NULL;
 
@@ -784,16 +784,16 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
       else
         args = g_strdup ("");
 
-      if (g_strstr_len (options.list_data.dclick_action, -1, "%s"))
+      if (g_strstr_len (options.action_data.dclick, -1, "%s"))
         {
           static GRegex *regex = NULL;
 
           if (!regex)
             regex = g_regex_new ("\%s", G_REGEX_OPTIMIZE, 0, NULL);
-          cmd = g_regex_replace_literal (regex, options.list_data.dclick_action, -1, 0, args, 0, NULL);
+          cmd = g_regex_replace_literal (regex, options.action_data.dclick, -1, 0, args, 0, NULL);
         }
       else
-        cmd = g_strdup_printf ("%s %s", options.list_data.dclick_action, args);
+        cmd = g_strdup_printf ("%s %s", options.action_data.dclick, args);
       g_free (args);
 
       if (cmd[0] == '@')
@@ -823,7 +823,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
 
       g_free (cmd);
     }
-  else if (options.common_data.editable && options.list_data.row_action)
+  else if (options.common_data.editable && options.action_data.row)
     edit_row_cb (NULL, NULL);
   else
     {
@@ -865,16 +865,16 @@ select_cb (GtkTreeSelection *sel, gpointer data)
   if (!args)
     args = g_strdup ("");
 
-  if (g_strstr_len (options.list_data.select_action, -1, "%s"))
+  if (g_strstr_len (options.action_data.select, -1, "%s"))
     {
       static GRegex *regex = NULL;
 
       if (!regex)
         regex = g_regex_new ("\%s", G_REGEX_OPTIMIZE, 0, NULL);
-      cmd = g_regex_replace_literal (regex, options.list_data.select_action, -1, 0, args, 0, NULL);
+      cmd = g_regex_replace_literal (regex, options.action_data.select, -1, 0, args, 0, NULL);
     }
   else
-    cmd = g_strdup_printf ("%s %s", options.list_data.select_action, args);
+    cmd = g_strdup_printf ("%s %s", options.action_data.select, args);
   g_free (args);
 
   run_command_async (cmd);
@@ -903,7 +903,7 @@ add_row_cb (GtkMenuItem *item, gpointer data)
   else
     gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 
-  if (options.list_data.row_action)
+  if (options.action_data.row)
     {
       gchar *out = NULL;
       gint exit;
@@ -917,7 +917,7 @@ add_row_cb (GtkMenuItem *item, gpointer data)
         }
 
       /* run command */
-      cmd = g_strdup_printf ("%s add", options.list_data.row_action);
+      cmd = g_strdup_printf ("%s add", options.action_data.row);
       exit = run_command_sync (cmd, &out);
       g_free (cmd);
       if (exit == 0)
@@ -947,7 +947,7 @@ edit_row_cb (GtkMenuItem *item, gpointer data)
   if (!gtk_tree_selection_get_selected (sel, NULL, &iter))
     return;
 
-  if (options.list_data.row_action)
+  if (options.action_data.row)
     {
       gchar *cmd, *args, *out = NULL;
       gint exit;
@@ -962,7 +962,7 @@ edit_row_cb (GtkMenuItem *item, gpointer data)
 
       /* run command */
       args = get_data_as_string (&iter);
-      cmd = g_strdup_printf ("%s edit %s", options.list_data.row_action, args);
+      cmd = g_strdup_printf ("%s edit %s", options.action_data.row, args);
       g_free (args);
       exit = run_command_sync (cmd, &out);
       g_free (cmd);
@@ -993,7 +993,7 @@ del_row_cb (GtkMenuItem *item, gpointer data)
 
   if (gtk_tree_selection_get_selected (sel, NULL, &iter))
     {
-      if (options.list_data.row_action)
+      if (options.action_data.row)
         {
           gchar *cmd, *args;
           gint exit;
@@ -1005,7 +1005,7 @@ del_row_cb (GtkMenuItem *item, gpointer data)
 
           /* run command */
           args = get_data_as_string (&iter);
-          cmd = g_strdup_printf ("%s del %s", options.list_data.row_action, args);
+          cmd = g_strdup_printf ("%s del %s", options.action_data.row, args);
           g_free (args);
           exit = run_command_sync (cmd, NULL);
           g_free (cmd);
@@ -1137,7 +1137,7 @@ popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (del_row_cb), menu);
 
-          if (options.list_data.row_action)
+          if (options.action_data.row)
             {
               item = gtk_menu_item_new_with_label (_("Edit row"));
               gtk_widget_show (item);
@@ -1428,7 +1428,7 @@ list_create_widget (GtkWidget *dlg)
       if (options.common_data.multi && !options.list_data.checkbox && !options.list_data.radiobox)
         gtk_tree_selection_set_mode (sel, GTK_SELECTION_MULTIPLE);
 
-      if (!options.common_data.multi && options.list_data.select_action)
+      if (!options.common_data.multi && options.action_data.select)
         select_hndl = g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_cb), NULL);
 
       g_signal_connect (G_OBJECT (list_view), "row-activated", G_CALLBACK (double_click_cb), dlg);

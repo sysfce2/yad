@@ -106,16 +106,16 @@ img_changed_hook ()
 {
   gchar *qfn, *cmd = NULL;
 
-  if (options.picture_data.change_cmd == NULL)
+  if (options.action_data.changed == NULL)
     return;
   if (!img)
     return;
-  
+
   qfn = g_shell_quote (img->filename);
-  if (g_strstr_len (options.picture_data.change_cmd, -1, "%s") != NULL)
-    cmd = g_strdup_printf (options.picture_data.change_cmd, qfn);
+  if (g_strstr_len (options.action_data.changed, -1, "%s") != NULL)
+    cmd = g_strdup_printf (options.action_data.changed, qfn);
   else
-    cmd = g_strdup_printf ("%s '%s'", options.picture_data.change_cmd, qfn);
+    cmd = g_strdup_printf ("%s '%s'", options.action_data.changed, qfn);
   g_free (qfn);
 
   run_command_async (cmd);

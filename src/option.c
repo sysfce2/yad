@@ -150,7 +150,7 @@ static GOptionEntry general_options[] = {
     N_("Run commands under specified interpreter (default: bash -c '%s')"), N_("CMD") },
   { "uri-handler", 0, 0, G_OPTION_ARG_STRING, &options.data.uri_handler,
     N_("Set URI handler"), N_("CMD") },
-  { "f1-action", 0, 0, G_OPTION_ARG_STRING, &options.data.f1_action,
+  { "f1-action", 0, 0, G_OPTION_ARG_STRING, &options.action_data.f1,
     N_("Set command running when F1 was pressed"), N_("CMD") },
   { "workdir", 0, 0, G_OPTION_ARG_STRING, &options.data.workdir,
     N_("Set working directory"), N_("PATH") },
@@ -356,11 +356,11 @@ static GOptionEntry entry_options[] = {
     N_("Use spin button for text entry"), NULL },
   { "licon", 0, 0, G_OPTION_ARG_FILENAME, &options.entry_data.licon,
     N_("Set the left entry icon"), N_("IMAGE") },
-  { "licon-action", 0, 0, G_OPTION_ARG_STRING, &options.entry_data.licon_action,
+  { "licon-action", 0, 0, G_OPTION_ARG_STRING, &options.action_data.licon,
     N_("Set the left entry icon action"), N_("CMD") },
   { "ricon", 0, 0, G_OPTION_ARG_FILENAME, &options.entry_data.ricon,
     N_("Set the right entry icon"), N_("IMAGE") },
-  { "ricon-action", 0, 0, G_OPTION_ARG_STRING, &options.entry_data.ricon_action,
+  { "ricon-action", 0, 0, G_OPTION_ARG_STRING, &options.action_data.ricon,
     N_("Set the right entry icon action"), N_("CMD") },
   { NULL }
 };
@@ -406,7 +406,7 @@ static GOptionEntry form_options[] = {
     N_("Cycled reading of stdin data"), NULL },
   { "align-buttons", 0, 0, G_OPTION_ARG_NONE, &options.form_data.align_buttons,
     N_("Align labels on button fields"), NULL },
-  { "changed-action", 0, 0, G_OPTION_ARG_STRING, &options.form_data.changed_action,
+  { "changed-action", 0, 0, G_OPTION_ARG_STRING, &options.action_data.changed,
     N_("Set changed action"), N_("CMD") },
   { NULL }
 };
@@ -505,11 +505,11 @@ static GOptionEntry list_options[] = {
     N_("Set the row separator value"), N_("TEXT") },
   { "limit", 0, 0, G_OPTION_ARG_INT, &options.list_data.limit,
     N_("Set the limit of rows in list"), N_("NUMBER") },
-  { "dclick-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.dclick_action,
+  { "dclick-action", 0, 0, G_OPTION_ARG_STRING, &options.action_data.dclick,
     N_("Set double-click action"), N_("CMD") },
-  { "select-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.select_action,
+  { "select-action", 0, 0, G_OPTION_ARG_STRING, &options.action_data.select,
     N_("Set select action"), N_("CMD") },
-  { "row-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.row_action,
+  { "row-action", 0, 0, G_OPTION_ARG_STRING, &options.action_data.row,
     N_("Set row action"), N_("CMD") },
   { "tree-expanded", 0, 0, G_OPTION_ARG_NONE, &options.list_data.tree_expanded,
     N_("Expand all tree nodes"), NULL },
@@ -595,7 +595,7 @@ static GOptionEntry picture_options[] = {
     N_("Set initial size (fit or orig)"), N_("TYPE") },
   { "inc", 0, 0, G_OPTION_ARG_INT, &options.picture_data.inc,
     N_("Set increment for picture scaling (default - 5)"), N_("NUMBER") },
-  { "image-changed", 0, 0, G_OPTION_ARG_STRING, &options.picture_data.change_cmd,
+  { "image-changed", 0, 0, G_OPTION_ARG_STRING, &options.action_data.changed,
     N_("Set action on image changing"), N_("CMD") },
   { NULL }
 };
@@ -1693,7 +1693,6 @@ yad_options_init (void)
   options.data.use_interp = FALSE;
   options.data.interp = "bash -c \"%s\"";
   options.data.uri_handler = settings->open_command;
-  options.data.f1_action = NULL;
   options.data.workdir = NULL;
 
   /* Initialize window options */
@@ -1750,6 +1749,15 @@ yad_options_init (void)
   options.common_data.spell_lang = NULL;
 #endif
 
+  /* Initialize actions data */
+  options.action_data.f1 = NULL;
+  options.action_data.licon = NULL;
+  options.action_data.ricon = NULL;
+  options.action_data.changed = NULL;
+  options.action_data.dclick = NULL;
+  options.action_data.select = NULL;
+  options.action_data.row = NULL;
+
   /* initialize about data */
   options.about_data.name = NULL;
   options.about_data.copyright = NULL;
@@ -1792,9 +1800,7 @@ yad_options_init (void)
   options.entry_data.completion = FALSE;
   options.entry_data.numeric = FALSE;
   options.entry_data.licon = NULL;
-  options.entry_data.licon_action = NULL;
   options.entry_data.ricon = NULL;
-  options.entry_data.ricon_action = NULL;
 
   /* Initialize file data */
   options.file_data.directory = FALSE;
@@ -1816,7 +1822,6 @@ yad_options_init (void)
   options.form_data.focus_field = 1;
   options.form_data.cycle_read = FALSE;
   options.form_data.align_buttons = FALSE;
-  options.form_data.changed_action = NULL;
   options.form_data.homogeneous = FALSE;
 
 #ifdef HAVE_HTML
@@ -1862,9 +1867,6 @@ yad_options_init (void)
   options.list_data.wrap_cols = NULL;
   options.list_data.ellipsize = PANGO_ELLIPSIZE_NONE;
   options.list_data.ellipsize_cols = NULL;
-  options.list_data.dclick_action = NULL;
-  options.list_data.select_action = NULL;
-  options.list_data.row_action = NULL;
   options.list_data.tree_expanded = FALSE;
   options.list_data.regex_search = FALSE;
   options.list_data.clickable = TRUE;
@@ -1898,7 +1900,6 @@ yad_options_init (void)
   /* Initialize picture data */
   options.picture_data.size = YAD_PICTURE_ORIG;
   options.picture_data.inc = 5;
-  options.picture_data.change_cmd = NULL;
 
   /* Initialize popup data */
   options.popup_data.transparent = 0;

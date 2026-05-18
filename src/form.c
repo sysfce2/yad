@@ -458,12 +458,12 @@ field_changed_cb (GtkWidget *w, guint fn)
   if (disable_changed)
     return;
 
-  if (options.form_data.changed_action)
+  if (options.action_data.changed)
     {
       gchar *str;
       GString *cmd;
 
-      str = g_strdup_printf ("%s %d %%%d", options.form_data.changed_action, fn + 1, fn + 1);
+      str = g_strdup_printf ("%s %d %%%d", options.action_data.changed, fn + 1, fn + 1);
       cmd = expand_action (str);
       g_free (str);
 
