@@ -89,7 +89,10 @@ expand_action (gchar * cmd)
                   break;
                 case YAD_FIELD_COMBO:
                 case YAD_FIELD_COMBO_ENTRY:
-                  buf = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, num)));
+                  if (options.common_data.num_output && fld->type == YAD_FIELD_COMBO)
+                    buf = g_strdup_printf ("%d", gtk_combo_box_get_active (GTK_COMBO_BOX (g_slist_nth_data (fields, num))));
+                  else
+                    buf = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, num)));
                   arg = g_shell_quote (buf ? buf : "");
                   g_free (buf);
                   break;
