@@ -157,7 +157,7 @@ activate_cb (GtkWidget * widget, YadData * data)
 {
   if ((action == NULL && !options.common_data.listen) || (action && g_ascii_strcasecmp (action, "quit") == 0))
     {
-      exit_code = YAD_RESPONSE_OK;
+      exit_code = options.data.def_resp;
       gtk_main_quit ();
     }
   else if (action)
@@ -177,7 +177,7 @@ middle_quit_cb (GtkStatusIcon * icon, GdkEventButton * ev, gpointer data)
   if (ev->button == 2)
     {
       if (options.data.escape_ok)
-        exit_code = YAD_RESPONSE_OK;
+        exit_code = options.data.def_resp;
       else
         exit_code = YAD_RESPONSE_ESC;
       gtk_main_quit ();
@@ -195,7 +195,7 @@ popup_menu_item_activate_cb (GtkWidget * w, gpointer data)
     {
       if (g_ascii_strcasecmp (g_strstrip (cmd), "quit") == 0)
         {
-          exit_code = YAD_RESPONSE_OK;
+          exit_code = options.data.def_resp;
           gtk_main_quit ();
         }
       else
