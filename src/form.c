@@ -185,7 +185,7 @@ set_field_value (guint num, gchar *value)
   YadField *fld = g_slist_nth_data (options.form_data.fields, num);
 
   w = GTK_WIDGET (g_slist_nth_data (fields, num));
-  if (g_ascii_strcasecmp (value, "@disabled@") == 0)
+  if (strcasecmp (value, "@disabled@") == 0)
     {
       gtk_widget_set_sensitive (w, FALSE);
       return;
@@ -428,8 +428,10 @@ button_clicked_cb (GtkButton * b, gpointer d)
 
   if (action && action[0])
     {
-      GString *cmd;
-      if (action[0] == '@')
+      GString *cmd = NULL;
+      if (strcasecmp (action, "quit") == 0)
+        yad_exit (options.data.def_resp);
+      else if (action[0] == '@')
         {
           gchar *data = NULL;
           gint exit = 1;
@@ -444,7 +446,8 @@ button_clicked_cb (GtkButton * b, gpointer d)
           cmd = expand_action (action);
           run_command_async (cmd->str);
         }
-      g_string_free (cmd, TRUE);
+      if (cmd)
+        g_string_free (cmd, TRUE);
     }
 
   /* set focus to specified field */
