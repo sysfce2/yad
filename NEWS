@@ -1,3 +1,16 @@
+Version 15.0
+    - add popup dialog type
+    - drop GSettings dependency
+    - make AppIndicator as a separate dialog
+    - add --continuous option to progress dialog
+    - add --select action to calendar dialog
+    - add "quit" command to the button fields in form dialog
+    - add yad-send stock item
+    - honour --num-output option when expanding combo-box values in form dialog
+    - honour default response code in notification dialog
+    - better handling signals
+    - improve handling of return codes from child processes
+
 Version 14.2
     - remove intltool dependency (use pure gettext)
     - fix zooming in html dialog
