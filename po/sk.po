@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2026-05-18 08:30+0300\n"
+"POT-Creation-Date: 2026-06-30 16:06+0300\n"
 "PO-Revision-Date: 2013-03-30 08:10+0100\n"
 "Last-Translator: Slavko <linux@slavino.sk>\n"
 "Language-Team: slovenčina <debian-l10n-slovak@lists.debian.org>\n"
@@ -67,46 +67,46 @@ msgstr "Počiatočná hodnota je menšia ako minimálna.\n"
 msgid "Initial value greater than maximum.\n"
 msgstr "Maximálna hodnota je väčšia ako minimálna.\n"
 
-#: src/form.c:515
+#: src/form.c:521
 msgid "Select files"
 msgstr "Vyberte súbory"
 
-#: src/form.c:518 src/form.c:526 src/form.c:605 src/form.c:613 src/form.c:664
+#: src/form.c:524 src/form.c:532 src/form.c:611 src/form.c:619 src/form.c:670
 #: src/html.c:245 src/html.c:278 src/picture.c:296 src/text.c:121
 #: src/text.c:192 src/util.c:40
 msgid "Cancel"
 msgstr ""
 
-#: src/form.c:519 src/form.c:527 src/form.c:606 src/form.c:614 src/form.c:665
+#: src/form.c:525 src/form.c:533 src/form.c:612 src/form.c:620 src/form.c:671
 #: src/html.c:246 src/picture.c:297 src/text.c:122 src/text.c:193 src/util.c:46
 msgid "OK"
 msgstr ""
 
-#: src/form.c:523
+#: src/form.c:529
 msgid "Select folders"
 msgstr "Vyberte adresáre"
 
-#: src/form.c:602
+#: src/form.c:608
 msgid "Select or create file"
 msgstr "Vyberte alebo vytvorte  súbor"
 
-#: src/form.c:610
+#: src/form.c:616
 msgid "Select or create folder"
 msgstr "Vyberte alebo vytvorte  adresár"
 
-#: src/form.c:661
+#: src/form.c:667
 msgid "Select date"
 msgstr "Vyberte dátum"
 
-#: src/form.c:1041
+#: src/form.c:1047
 msgid "Select file"
 msgstr "Vyberte súbor"
 
-#: src/form.c:1071
+#: src/form.c:1077
 msgid "Select folder"
 msgstr "Vyberte adresár"
 
-#: src/form.c:1239 src/form.c:1241
+#: src/form.c:1245 src/form.c:1247
 msgid "Link"
 msgstr ""
 
